@@ -1,0 +1,49 @@
+---
+name: provisioning build environment
+hosts: db
+become: yes
+
+  tasks:
+  - name: Ensure the packegs is present
+    apt: 
+      - maven
+      - tomcat9
+      - git
+    state: present
+
+  - name: Ensure demo-project is downloaded
+    shell: git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+
+  - name: Buid package 
+    shell: mvn package
+    args:
+      chdir: /boxfuse-sample-java-war-hello
+
+  - name: Copy hello-1.0.war
+    fetch:
+      src: /boxfuse-sample-java-war-hello/target/hello-1.0.war
+      dest: /tmp
+
+name: provisioning prod environment
+hosts: web
+become: yes
+
+  tasks:
+  - name: Ensure tomcat9 packes is present
+    apt:
+      name: tomcat9
+      state: present
+
+  - name: Ensure hello-1.0.war file is present
+    copy:
+      src: /tmp/hello-1.0.war
+      dest: /var/lib/tomcat9/webapps
+
+
+    
+
+
+      
+
+
+    
