@@ -5,17 +5,17 @@
 
   tasks:
   - name: Ensure the packegs is present
-    apt: 
+    apt:
       - maven
       - tomcat9
       - git
     state: present
 
   - name: Ensure demo-project is downloaded
-    git: 
+    git:
       repo: 'https://github.com/boxfuse/boxfuse-sample-java-war-hello.git'
 
-  - name: Buid package 
+  - name: Buid package
     shell: mvn package
     args:
       chdir: /boxfuse-sample-java-war-hello
@@ -39,10 +39,4 @@
     copy:
       src: /tmp/hello-1.0.war
       dest: /var/lib/tomcat9/webapps
-    
-
-
-      
-
-
-    
+---   
