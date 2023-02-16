@@ -12,7 +12,8 @@
     state: present
 
   - name: Ensure demo-project is downloaded
-    shell: git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+    git: 
+      repo: 'https://github.com/boxfuse/boxfuse-sample-java-war-hello.git'
 
   - name: Buid package 
     shell: mvn package
