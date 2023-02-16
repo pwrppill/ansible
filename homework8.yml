@@ -14,7 +14,8 @@
   - name: Ensure demo-project is downloaded
     git:
       repo: 'https://github.com/boxfuse/boxfuse-sample-java-war-hello.git'
-
+      dest: ./
+      
   - name: Buid package
     shell: mvn package
     args:
